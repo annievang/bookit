@@ -1,6 +1,7 @@
 Bookit::Application.routes.draw do
   resources :bookmarks
   root :to => 'bookmarks#index'
+  
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
