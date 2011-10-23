@@ -10,9 +10,9 @@ Bookit::Application.routes.draw do
   get "sessions/new"
   get "users/new"
 
-
+  root :to => 'sessions#new'
   
-  root :to => 'bookmarks#index'
+  #root :to => 'bookmarks#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

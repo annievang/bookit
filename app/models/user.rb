@@ -13,12 +13,13 @@ class User < ActiveRecord::Base
   has_many :bookmarks
   
   attr_accessor :password
-  attr_accessible :name, :email, :password, :password_confirmation
+  attr_accessible :name, :username, :email, :password, :password_confirmation
   
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
    
   validates :name,  :presence => true,
                     :length   => { :maximum => 50 }
+  validates_uniqueness_of :username
   validates :email, :presence => true
   
   # Automatically create the virtual attribute 'password_confirmation'.
