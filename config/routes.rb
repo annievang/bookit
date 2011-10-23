@@ -1,8 +1,16 @@
 Bookit::Application.routes.draw do
-  get "users/new"
-
   resources :bookmarks
   resources :users
+  
+  resources :sessions, :only => [:new, :create, :destroy]
+
+  match '/signup',  :to => 'users#new'
+  match '/signin',  :to => 'sessions#new'
+  match '/signout', :to => 'sessions#destroy'
+  get "sessions/new"
+  get "users/new"
+
+
   
   root :to => 'bookmarks#index'
 
