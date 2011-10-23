@@ -1,4 +1,6 @@
 Bookit::Application.routes.draw do
+  get "users/new"
+
   resources :bookmarks
   root :to => 'bookmarks#index'
 
