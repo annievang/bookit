@@ -1,6 +1,8 @@
 <h1>Listing Bookmarks</h1>
 
-<table>
+<% unless @bookmarks.blank? %>
+ 
+    <table>
   <tr>
     <th>Url</th>
     <th>Name</th>
@@ -24,5 +26,13 @@
 </table>
 
 <br />
+  
+<% else %>
+  <p>You have no bookmarks.</p>
+<% end %>
+
+
+
+
 
 <%= link_to 'New Bookmark', new_bookmark_path %>
