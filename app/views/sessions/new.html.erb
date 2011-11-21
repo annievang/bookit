@@ -1,3 +1,9 @@
+<% if signed_in? %>
+<p id="notice"><%= notice %></p>
+
+hi
+
+<% else %>
 <h1>Sign in</h1>
 
 <%= form_for(:session, :url => sessions_path) do |f| %>
@@ -15,4 +21,4 @@
 <% end %>
 
 <p>New user? <%= link_to "Sign up now!", signup_path %></p>
-
+<% end %>

@@ -1,4 +1,8 @@
 class BookmarksController < ApplicationController
+
+  before_filter :authenticate, :only => [:create, :destroy]
+  before_filter :authorized_user, :only => :destroy
+  
   # GET /bookmarks
   # GET /bookmarks.xml
   def index
@@ -40,17 +44,26 @@ class BookmarksController < ApplicationController
   # POST /bookmarks
   # POST /bookmarks.xml
   def create
-    @bookmark = Bookmark.new(params[:bookmark])
+    #@bookmark = Bookmark.new(params[:bookmark])
+    #
+    #respond_to do |format|
+    #  if @bookmark.save
+    #    format.html { redirect_to(@bookmark, :notice => 'Bookmark was successfully created.') }
+    #    format.xml { render :xml => @bookmark, :status => :created, :location => @bookmark }
+    #  else
+    #    format.html { render :action => "new" }
+    #    format.xml { render :xml => @bookmark.errors, :status => :unprocessable_entity }
+    #  end
+    #end
 
-    respond_to do |format|
-      if @bookmark.save
-        format.html { redirect_to(@bookmark, :notice => 'Bookmark was successfully created.') }
-        format.xml  { render :xml => @bookmark, :status => :created, :location => @bookmark }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @bookmark.errors, :status => :unprocessable_entity }
-      end
+    @bookmark  = current_user.bookmarks.build(params[:bookmark])
+    if @bookmark.save
+      flash[:success] = "Bookmark created!"
+      redirect_to root_path, :flash => { :success => "Bookmark created!" }
+    else
+      render 'pages/home'
     end
+
   end
 
   # PUT /bookmarks/1
@@ -72,12 +85,24 @@ class BookmarksController < ApplicationController
   # DELETE /bookmarks/1
   # DELETE /bookmarks/1.xml
   def destroy
-    @bookmark = Bookmark.find(params[:id])
+    #@bookmark = Bookmark.find(params[:id])
+    #@bookmark.destroy
+    
+    #@bookmark.destroy
+    #redirect_back_or root_path
+    #
+    #respond_to do |format|
+    #  format.html { redirect_to(bookmarks_url) }
+    #  format.xml  { head :ok }
+    #end
     @bookmark.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(bookmarks_url) }
-      format.xml  { head :ok }
-    end
+    redirect_to root_path, :flash => { :success => "Bookmark deleted!" }
   end
+  
+  private
+
+    def authorized_user
+      @bookmark = current_user.bookmark.find_by_id(params[:id])
+      redirect_to root_path if @bookmark.nil?
+    end
 end

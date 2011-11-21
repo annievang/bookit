@@ -1,5 +1,21 @@
-<p id="notice"><%= notice %></p>
 
+<div class="floater-left">
+<p id="notice"><%= notice %></p>
+  
+      <% unless @user.bookmarks.empty? %>
+        <table class="bookmarks" summary="User bookmark">
+          <tr><td><h2>Bookmarks</h2></td></tr>
+          <%= render @bookmarks %>
+        </table>
+        <%= will_paginate @bookmarks %>
+        
+      <% else %>
+        You have no bookmarks.  
+      <% end %>
+</div>
+      
+<div class="floater">
+  <h3>Account Details</h3>
 <p>
   <b>Real Name:</b>
   <%= @user.name %>
@@ -19,7 +35,9 @@
   <b>Updated at</b>
   <%= @user.updated_at.strftime('%m/%d/%Y') %>
 </p>
+<p>
+<%= link_to 'Edit', edit_user_path(@user) %> 
+<!--<%= link_to 'Back', users_path %>-->
+</p>
+</div>
 
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>

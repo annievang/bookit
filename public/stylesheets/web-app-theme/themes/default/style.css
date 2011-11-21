@@ -176,6 +176,7 @@ hr {
 #footer {
   color: #261f1f;
   text-shadow: none;
+  overflow:hidden;
 }
 #footer .block {
   -webkit-box-shadow: none;
@@ -460,4 +461,17 @@ a.button:active, button.button:active {
 .login div.right, .signup div div.right {
   width: 74%;
   float: right;
+}
+.timestamp{
+font-style:italic;
+}
+.floater{
+  overflow:hidden;
+  border: 1px dashed;
+  padding: 10px;
+}
+.floater-left{
+overflow:hidden;
+width:70%;
+vertical-align:top;
 }

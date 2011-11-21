@@ -1,0 +1,21 @@
+<% if signed_in? %>
+  <table class="front" summary="For signed-in users">
+    <tr>
+      <td class="main">
+        <h1 class="bookmark">Add a bookmark</h1>
+        <%= render 'shared/bookmark_form' %>
+      <td class="sidebar round">
+        <%= render 'shared/user_info' %>
+      </td>
+    </tr>
+  </table>
+<% else %>
+  <h1>Oh oh!</h1>
+
+  <p>
+    This is a private bookmarking site.  Please create an account or sign in!
+  </p>
+
+  <%= link_to "Sign up now!", signup_path, :class => "signup_button round" %>  |
+  <%= link_to "Sign in!", signin_path %>
+<% end %>

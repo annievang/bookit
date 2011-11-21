@@ -10,10 +10,11 @@
 #
 
 class User < ActiveRecord::Base
-  has_many :bookmarks
   
   attr_accessor :password
   attr_accessible :name, :username, :email, :password, :password_confirmation
+  
+  has_many :bookmarks, :dependent => :destroy
   
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
    

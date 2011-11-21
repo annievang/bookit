@@ -1,7 +1,17 @@
 class SessionsController < ApplicationController
 
   def new
-    @title = "Sign in"
+
+    if signed_in?
+      @title = "Sign in"
+
+      redirect_to :controller => 'users', :action => 'show', :id => current_user.id
+    #redirect_to @user
+    else
+      # Sign the user in and redirect to the user's show page.
+      @title = "Sign in"
+      render 'new'
+    end
   end
   
   def create
@@ -22,4 +32,5 @@ class SessionsController < ApplicationController
     sign_out
     redirect_to root_path
   end
+  
 end
