@@ -46,3 +46,6 @@ end
 # group :development, :test do
 #   gem 'webrat'
 # end
+
+gem "rmagick"
+gem "carrierwave"

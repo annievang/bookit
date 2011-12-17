@@ -12,9 +12,12 @@
 class User < ActiveRecord::Base
   
   attr_accessor :password
-  attr_accessible :name, :username, :email, :password, :password_confirmation
+  attr_accessible :name, :username, :email, :password, :password_confirmation, :image, :remote_image_url
+
   
   has_many :bookmarks, :dependent => :destroy
+  
+  mount_uploader :image, ImageUploader
   
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
    

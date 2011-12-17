@@ -13,7 +13,7 @@ class Bookmark < ActiveRecord::Base
   attr_accessible :url, :name
   belongs_to :user
   
-  validates :url, :length => { :minimum => 10 }, :presence => true, :uniqueness => true
+  validates :url, :length => { :minimum => 10 }, :presence => true
   validates :name, :length => { :maximum => 100 }, :presence => true
   
   validates :user_id, :presence => true

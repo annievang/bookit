@@ -16,6 +16,10 @@
       
 <div class="floater">
   <h3>Account Details</h3>
+  
+<p>
+  <%= image_tag @user.image_url(:thumb) if @user.image? %>
+</p>  
 <p>
   <b>Real Name:</b>
   <%= @user.name %>
