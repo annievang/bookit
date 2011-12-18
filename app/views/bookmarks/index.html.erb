@@ -2,50 +2,11 @@
 
 <% unless @bookmarks.blank? %>
 
-  <strong>duplicate</strong>  <%= @duplicates %><br><br>
-  <strong>urlcount</strong>  <%= @urlcount %><br><br>
-  <strong>getuid</strong>  <%= @getuid %><br><br>
-  <strong>getallpeople</strong>  <%= @getallpeople %><br><br>
-  <strong>getname</strong>  <%= @getname %><br><br>
-    <hr>
-    <h3>Google only</h3>
-  <% @getallpeople.each do |e| %>
-   <%= e.user_id %>
-  <br/><br/>
-  
-  <% end %>
-  
-  <hr>
-    <h3>Unique counts</h3>
-  <% @urlcount.each do |s| %>
-   <%= s[0]%> ---
-   <%= s[1]%>
-  <br/><br/>
-  
-  <% end %>
-  
-  <hr>
-    <h3>Uniques</h3>
-  <% @duplicates.each do |x| %>
-  <%= x.url %> <br/>
-  
-  <% end %>
- <hr>
-    <table>
-  <tr>
-    <th>Url</th>
-    <th>Name</th>
-    <th>User Id</th>
-    <th>Updated At</th>
-    <th></th>
-    <th></th>
-  </tr>
-
+<table>
 <% @bookmarks.each do |bookmark| %>
   <tr>
     <td><%= bookmark.url %></td>
     <td><%= bookmark.name %></td>
-    <td><%= bookmark.user_id %></td>
     <td><%= bookmark.updated_at.strftime('%m/%d/%Y') %></td>
     <td><%= link_to 'Show', bookmark %></td>
     <td><%= link_to 'Edit', edit_bookmark_path(bookmark) %></td>

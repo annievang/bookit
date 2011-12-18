@@ -10,7 +10,7 @@
 #
 
 class Bookmark < ActiveRecord::Base
-  attr_accessible :url, :name, :user_id
+  attr_accessible :url, :name
   has_and_belongs_to_many :users
 
   
