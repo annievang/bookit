@@ -12,10 +12,13 @@
 class User < ActiveRecord::Base
   
   attr_accessor :password
-  attr_accessible :name, :username, :email, :password, :password_confirmation, :image, :remote_image_url
+  attr_accessible :name, :username, :email, :password, :password_confirmation, :image, :remote_image_url, :bookmark_id
 
+  #has_many :bookmarks
   
-  has_many :bookmarks, :dependent => :destroy
+  #has_and_belongs_to_many :bookmarks
+  has_many :bookmarkusers
+  has_many :bookmarks, :through => :bookmarkusers
   
   mount_uploader :image, ImageUploader
   

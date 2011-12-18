@@ -7,6 +7,28 @@ class BookmarksController < ApplicationController
   # GET /bookmarks.xml
   def index
     @bookmarks = Bookmark.all
+    
+    
+  @duplicates = Bookmark.find(:all,
+  :select     => "url, COUNT(url) AS duplicate_count",
+  :conditions => "url IS NOT NULL AND url != ''",
+  :group      => "url HAVING duplicate_count > 1")
+  
+  @urlcount = Bookmark.count(:group => :url,
+    :conditions => "url IS NOT NULL AND url != ''")
+  
+
+  @getuid = Bookmark.find(:all,
+  :select => "user_id, name",
+  :conditions => "user_id =='4'")
+  
+  @getallpeople = Bookmark.find(:all,
+   :select => "url, user_id",
+   :conditions => "url = 'http://google.com'")
+  
+  @getname = User.find(:all,
+    :select => "username", :conditions => "id = '4'")
+
 
     respond_to do |format|
       format.html # index.html.erb
@@ -18,8 +40,8 @@ class BookmarksController < ApplicationController
   # GET /bookmarks/1.xml
   def show
     @bookmark = Bookmark.find(params[:id])
-
-    respond_to do |format|
+  
+      respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @bookmark }
     end

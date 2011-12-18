@@ -5,7 +5,7 @@
       <% unless @user.bookmarks.empty? %>
         <table class="bookmarks" summary="User bookmark">
           <tr><td><h2>Bookmarks</h2></td></tr>
-          <%= render @bookmarks %>
+          <%= render @bookmarks %> 
         </table>
         <%= will_paginate @bookmarks %>
         
@@ -18,7 +18,13 @@
   <h3>Account Details</h3>
   
 <p>
-  <%= image_tag @user.image_url(:thumb) if @user.image? %>
+  
+  <% unless @user.image.to_s == nil %>
+    <%= image_tag @user.image_url(:thumb) if @user.image? %>
+  <% else %>
+    <%= image_tag ("default.jpg") %>
+  <% end %>
+
 </p>  
 <p>
   <b>Real Name:</b>

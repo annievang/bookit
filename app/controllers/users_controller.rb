@@ -16,6 +16,7 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    @user.bookmarkusers.build
     @title = "Sign up"
   end
   

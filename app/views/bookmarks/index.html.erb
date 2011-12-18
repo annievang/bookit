@@ -1,7 +1,36 @@
 <h1>Hello</h1>
 
-<!--<% unless @bookmarks.blank? %>
- 
+<% unless @bookmarks.blank? %>
+
+  <strong>duplicate</strong>  <%= @duplicates %><br><br>
+  <strong>urlcount</strong>  <%= @urlcount %><br><br>
+  <strong>getuid</strong>  <%= @getuid %><br><br>
+  <strong>getallpeople</strong>  <%= @getallpeople %><br><br>
+  <strong>getname</strong>  <%= @getname %><br><br>
+    <hr>
+    <h3>Google only</h3>
+  <% @getallpeople.each do |e| %>
+   <%= e.user_id %>
+  <br/><br/>
+  
+  <% end %>
+  
+  <hr>
+    <h3>Unique counts</h3>
+  <% @urlcount.each do |s| %>
+   <%= s[0]%> ---
+   <%= s[1]%>
+  <br/><br/>
+  
+  <% end %>
+  
+  <hr>
+    <h3>Uniques</h3>
+  <% @duplicates.each do |x| %>
+  <%= x.url %> <br/>
+  
+  <% end %>
+ <hr>
     <table>
   <tr>
     <th>Url</th>
@@ -35,4 +64,4 @@
 
 
 
-<%= link_to 'New Bookmark', new_bookmark_path %>-->
+<%= link_to 'New Bookmark', new_bookmark_path %>
