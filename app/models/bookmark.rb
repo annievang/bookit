@@ -11,10 +11,11 @@
 
 class Bookmark < ActiveRecord::Base
   attr_accessible :url, :name, :user_id
-  #has_and_belongs_to_many :users
+  has_and_belongs_to_many :users
+
   
-  has_many :bookmarkusers
-  has_many :users, :through => :bookmarkusers
+  #has_many :bookmarkusers
+  #has_many :users, :through => :bookmarkusers
   
   validates :url, :length => { :minimum => 10 }, :presence => true
   validates :name, :length => { :maximum => 100 }, :presence => true

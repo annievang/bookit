@@ -51,7 +51,9 @@ class BookmarksController < ApplicationController
   # GET /bookmarks/new.xml
   def new
     @bookmark = Bookmark.new
-
+    @users = User.find(:all)
+    
+    
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @bookmark }
@@ -79,6 +81,15 @@ class BookmarksController < ApplicationController
     #end
 
     @bookmark  = current_user.bookmarks.build(params[:bookmark])
+    #
+    #@bookmark = @current_user.bookmarks.build(params[:bookmark])
+    #@bookmarkuser = @current_user.bookmarkusers.build(params[:bookmark])
+    #
+    
+ 
+    
+    #@bookmarkuser.save
+    
     if @bookmark.save
       flash[:success] = "Bookmark created!"
       redirect_to root_path, :flash => { :success => "Bookmark created!" }

@@ -15,10 +15,11 @@ class User < ActiveRecord::Base
   attr_accessible :name, :username, :email, :password, :password_confirmation, :image, :remote_image_url, :bookmark_id
 
   #has_many :bookmarks
+  has_and_belongs_to_many :bookmarks
   
-  #has_and_belongs_to_many :bookmarks
-  has_many :bookmarkusers
-  has_many :bookmarks, :through => :bookmarkusers
+  #has_many :bookmarkusers
+  #has_many :bookmarks, :through => :bookmarkusers
+  #accepts_nested_attributes_for :bookmarkusers, :allow_destroy => true
   
   mount_uploader :image, ImageUploader
   
