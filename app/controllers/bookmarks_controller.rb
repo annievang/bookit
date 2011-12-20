@@ -1,34 +1,33 @@
 class BookmarksController < ApplicationController
 
   before_filter :authenticate, :only => [:create, :destroy]
-  before_filter :authorized_user, :only => :destroy
+ # before_filter :authorized_user, :only => [:show, :destroy]
   
   # GET /bookmarks
   # GET /bookmarks.xml
   def index
     @bookmarks = Bookmark.all
     
+    @test = Bookmark.where("url = ?", :url =>"http://google.com")
     
-  #@duplicates = Bookmark.find(:all,
-  #:select     => "url, COUNT(url) AS duplicate_count",
-  #:conditions => "url IS NOT NULL AND url != ''",
-  #:group      => "url HAVING duplicate_count > 1")
-  #
-  #@urlcount = Bookmark.count(:group => :url,
-  #  :conditions => "url IS NOT NULL AND url != ''")
-  #
-  #
-  #@getuid = Bookmark.find(:all,
-  #:select => "user_id, name",
-  #:conditions => "user_id =='4'")
-  #
-  #@getallpeople = Bookmark.find(:all,
-  # :select => "url, user_id",
-  # :conditions => "url = 'http://google.com'")
-  #
-  #@getname = User.find(:all,
-  #  :select => "username", :conditions => "id = '4'")
-
+    @duplicates = Bookmark.find(:all,
+  :select     => "url, COUNT(url) AS duplicate_count",
+  :conditions => "url IS NOT NULL AND url != ''",
+  :group      => "url HAVING duplicate_count > 1")
+  
+  @urlcount = Bookmark.count(:group => :url,
+    :conditions => "url IS NOT NULL AND url != ''")
+  
+  @getuid = Bookmark.find(:all,
+  :select => "user_id, name",
+  :conditions => "user_id =='4'")
+  
+  @getallpeople = Bookmark.find(:all,
+   :select => "url, user_id",
+   :conditions => "url = 'http://google.com'")
+  
+  @getname = User.find(:all,
+    :select => "username", :conditions => "id = '4'")
 
     respond_to do |format|
       format.html # index.html.erb
@@ -81,8 +80,11 @@ class BookmarksController < ApplicationController
     #end
 
     #@bookmark  = current_user.bookmarks.build(params[:bookmark])
-    #
+    
+    @user = @current_user
     @bookmark = @current_user.bookmarks.build(params[:bookmark])
+    @user.bookmarks << @bookmark
+    
     #@bookmarkuser = @current_user.bookmarkusers.build(params[:bookmark])
     #
     
@@ -118,7 +120,7 @@ class BookmarksController < ApplicationController
   # DELETE /bookmarks/1
   # DELETE /bookmarks/1.xml
   def destroy
-    #@bookmark = Bookmark.find(params[:id])
+    @bookmark = Bookmark.find(params[:id])
     #@bookmark.destroy
     
     #@bookmark.destroy
@@ -132,10 +134,10 @@ class BookmarksController < ApplicationController
     redirect_to root_path, :flash => { :success => "Bookmark deleted!" }
   end
   
-  private
-
-    def authorized_user
-      @bookmark = current_user.bookmark.find_by_id(params[:id])
-      redirect_to root_path if @bookmark.nil?
-    end
+  #private
+  #
+  #  def authorized_user
+  #    @bookmark = current_user.bookmark.find_by_id(params[:id])
+  #    redirect_to root_path if @bookmark.nil?
+  #  end
 end

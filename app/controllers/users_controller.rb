@@ -12,8 +12,21 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     #@users = Bookmarkuser.find_by_user_id(params[:id])
     
-    @bookmarks = @user.bookmarks.paginate(:page => params[:page])
-    @title = @user.name
+    
+    
+   # @sbm = Bookmark.find(params[:id])
+   # 
+   # @findbookmark = Bookmark.where("url = ?", @sbm)
+   #
+   # 
+   # @bookmarks = @user.bookmarks.paginate(:page => params[:page])
+   # @title = @user.name
+   # 
+   # 
+   # @getallpeople = Bookmark.find(:all,
+   #:select => "url, user_id",
+   #:conditions => "url = 'http://google.com'")
+      
   end
 
   def new

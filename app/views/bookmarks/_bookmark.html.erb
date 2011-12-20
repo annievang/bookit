@@ -4,9 +4,17 @@
     <span class="timestamp">
       -- Posted <%= time_ago_in_words(bookmark.created_at) %> ago.  
     </span>
-    <span>__ other people like it too.
+    <span>
+    
+      ---
+      <% @sbm = Bookmark.where("url = ?", bookmark.url)%>
+      <%= @sbm.count%> user really like this alot <br><%= bookmark.users.collect{|user| user.name}.join(",") %>
+<% uu = User.find(params[:id])%>
+<% la = @user.bookmarks.find_by_url("http://google.com")%>
+<%= @user.name %>
+   
     </span>
-    <span><%= link_to 'Edit', edit_bookmark_path(bookmark) %> 
+    <span><br><br><%= link_to 'Edit', edit_bookmark_path(bookmark) %> 
     <%= link_to 'Destroy', bookmark, :confirm => 'Are you sure?', :method => :delete %>
     </span>
       
